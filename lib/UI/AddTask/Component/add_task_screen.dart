@@ -25,20 +25,52 @@ class AddTaskScreen extends StatelessWidget {
 
             Row(
               children: [
-                Obx(() => Checkbox(
-                  value: controller.isPublic.value,
-                  onChanged: (val) => controller.isPublic.value = val!,
-                )),
-                const Text("Public"),
-                const SizedBox(width: 20),
-                Obx(() => Checkbox(
-                  value: controller.isBillable.value,
-                  onChanged: (val) => controller.isBillable.value = val!,
-                )),
-                const Text("Billable"),
+                Row(
+                  children: [
+                    Obx(() => Checkbox(
+                      value: controller.isPublic.value,
+                      onChanged: (val) => controller.isPublic.value = val!,
+                    )),
+                    const Text("Public"),
+                    const SizedBox(width: 20),
+                    Obx(() => Checkbox(
+                      value: controller.isBillable.value,
+                      onChanged: (val) => controller.isBillable.value = val!,
+                    )),
+                    const Text("Billable"),
+                  ],
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: controller.pickFiles,
+                  child: const Text("Attach File", style: TextStyle(color: Colors.blue)),
+                ),
               ],
             ),
+            const SizedBox(height: 10),
 
+            // 🔹 Show attached files list
+            Obx(() => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(controller.attachedFiles.length, (index) {
+                final file = controller.attachedFiles[index];
+                return Card(
+                  child: ListTile(
+                    leading: const Icon(Icons.insert_drive_file, color: Colors.grey),
+                    title: Text(file.name, overflow: TextOverflow.ellipsis),
+                    subtitle: Text("${(file.size / 1024).toStringAsFixed(2)} KB"),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.close, color: Colors.red),
+                      onPressed: () => controller.removeFile(index),
+                    ),
+                    onTap: () {
+                      // Optional: Open file
+                      // OpenFile.open(file.path);
+                    },
+                  ),
+                );
+              }),
+            )),
             const SizedBox(height: 10),
             CustomTextField(
               label: "Subject",
@@ -191,7 +223,7 @@ class AddTaskScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16),
         child: CustomButton(
-          text: "Save Task",
+          text: "Submit",
           onPressed: () {
             Get.snackbar("Success", "Task Saved Successfully",
                 snackPosition: SnackPosition.BOTTOM);

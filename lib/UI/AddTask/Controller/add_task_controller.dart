@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:file_picker/file_picker.dart';
 
 class AddTaskController extends GetxController {
   var isPublic = false.obs;
@@ -18,4 +19,21 @@ class AddTaskController extends GetxController {
   var selectedAssigned = "a".obs;
   var selectedFollowUp = "a".obs;
 
+
+  var attachedFiles = <PlatformFile>[].obs;
+
+  Future<void> pickFiles() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+      type: FileType.any, // 🔹 allow all file types
+    );
+
+    if (result != null) {
+      attachedFiles.addAll(result.files);
+    }
+  }
+
+  void removeFile(int index) {
+    attachedFiles.removeAt(index);
+  }
 }
