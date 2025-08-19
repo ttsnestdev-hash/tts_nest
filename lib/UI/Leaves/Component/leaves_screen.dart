@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../Widgets/DropdownWigets/dropdown_widgtes.dart';
 import '../../../Widgets/TextFormFeildWigets/textformfeilds_widgets.dart';
+import '../../../Widgets/custom_button.dart';
 import '../Controller/leave_controller.dart';
 
 class LeavesScreen extends StatelessWidget {
@@ -20,6 +21,7 @@ class LeavesScreen extends StatelessWidget {
           children: [
             // Leave Type Dropdown with CardDropdown
             Obx(() => CardDropdown<String>(
+                  borderRadius: 5,
                   height: 60,
                   hintText: "Select leave type",
                   items: controller.leaveTypes
@@ -150,20 +152,6 @@ class LeavesScreen extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // Comp off toggle
-            Row(
-              children: [
-                const Text("Is it a Comp Off?"),
-                const SizedBox(width: 12),
-                Obx(() => Switch(
-                      value: controller.isCompOff.value,
-                      onChanged: (val) => controller.isCompOff.value = val,
-                    )),
-              ],
-            ),
-
-            const SizedBox(height: 16),
-
             CommonTextField(
               controller: controller.empCodeCtrl,
               hintText: "Employee Code",
@@ -183,16 +171,9 @@ class LeavesScreen extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    padding: const EdgeInsets.symmetric(vertical: 14)),
-                onPressed: controller.submitLeave,
-                child:
-                    const Text("SUBMIT", style: TextStyle(color: Colors.white)),
-              ),
+            CustomButton(
+              text: 'SUBMIT',
+              onPressed: controller.submitLeave,
             ),
           ],
         ),

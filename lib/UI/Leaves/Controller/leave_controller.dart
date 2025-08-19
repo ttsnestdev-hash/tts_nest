@@ -20,9 +20,6 @@ class LeaveRequestController extends GetxController {
   // Full Day / AN / FN
   var selectedDayType = "Full day".obs;
 
-  // Comp off
-  var isCompOff = false.obs;
-
   // Submit Function
   void submitLeave() {
     if (selectedLeaveType.isEmpty) {
@@ -46,7 +43,6 @@ class LeaveRequestController extends GetxController {
       "duration": durationCtrl.text,
       "dayType": selectedDayType.value,
       "reason": reasonCtrl.text,
-      "compOff": isCompOff.value,
       "employeeCode": empCodeCtrl.text,
       "employeeName": empNameCtrl.text,
       "phone": phoneCtrl.text,

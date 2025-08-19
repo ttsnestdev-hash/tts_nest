@@ -31,10 +31,13 @@ class AttendanceScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Icon(
-                          controller.isExpanded.value
-                              ? Icons.expand_less
-                              : Icons.expand_more,
+                        InkWell(
+                          onTap: controller.toggleExpanded,
+                          child: Icon(
+                            controller.isExpanded.value
+                                ? Icons.expand_less
+                                : Icons.expand_more,
+                          ),
                         ),
                       ],
                     ),

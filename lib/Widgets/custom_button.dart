@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../theme.dart';
 
@@ -37,12 +36,14 @@ class CustomButton extends StatelessWidget {
         ),
         onPressed: isLoading ? null : onPressed,
         child: isLoading
-            ? CircularProgressIndicator(
-              strokeWidth: 2,
-              color: Colors.white,
-            )
-            : Text( text,
-        ),
+            ? const CircularProgressIndicator(
+                strokeWidth: 2,
+                color: AppTheme.primaryColor,
+              )
+            : Text(
+                text,
+                style: const TextStyle(color: Colors.white),
+              ),
       ),
     );
   }
