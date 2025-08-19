@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../Routes/Routes.dart';
+
 class LoginController extends GetxController {
   final formKey = GlobalKey<FormState>();
 
@@ -21,6 +23,8 @@ class LoginController extends GetxController {
     // TODO: replace with real API + navigation
     Get.snackbar('Success', 'Logged in as ${emailCtrl.text}',
         snackPosition: SnackPosition.BOTTOM);
+
+    Get.toNamed(Routes.dashboardScreen);
   }
 
   void goToRegister() {

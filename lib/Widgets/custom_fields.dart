@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../theme.dart';
-
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 class CircleTextField extends StatelessWidget {
   final String hint;
   final TextEditingController controller;
@@ -45,6 +46,70 @@ class CircleTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(color: Colors.red),
         ),
+      ),
+    );
+  }
+}
+
+
+class CustomTextField extends StatelessWidget {
+  final String label;
+  final TextInputType keyboardType;
+  final Function(String)? onChanged;
+  final bool readOnly;
+  final VoidCallback? onTap;
+  final Widget? suffixIcon;
+  final RxString? controllerText;
+
+  const CustomTextField({
+    super.key,
+    required this.label,
+    this.keyboardType = TextInputType.text,
+    this.onChanged,
+    this.readOnly = false,
+    this.onTap,
+    this.suffixIcon,
+    this.controllerText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (controllerText != null) {
+      // 🔹 Only wrap the TEXT value with Obx
+      return Obx(() => TextField(
+        keyboardType: keyboardType,
+        readOnly: readOnly,
+        onTap: onTap,
+        onChanged: onChanged,
+        controller: TextEditingController.fromValue(
+          TextEditingValue(
+            text: controllerText!.value,
+            selection: TextSelection.collapsed(
+              offset: controllerText!.value.length,
+            ),
+          ),
+        ),
+        decoration: InputDecoration(
+          labelText: label,
+          // border: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(5),
+          // ),
+          suffixIcon: suffixIcon,
+        ),
+      ));
+    }
+
+    return TextField(
+      keyboardType: keyboardType,
+      readOnly: readOnly,
+      onTap: onTap,
+      onChanged: onChanged,
+      decoration: InputDecoration(
+        labelText: label,
+        // border: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(5),
+        // ),
+        suffixIcon: suffixIcon,
       ),
     );
   }
