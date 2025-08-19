@@ -3,14 +3,31 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../Routes/Routes.dart';
+import '../../../Widgets/Drawer/drawer_screen.dart';
 import '../../../Widgets/quick_access_card.dart';
+import '../Controller/home_controller.dart';
 
 class DashboardHome extends StatelessWidget {
   const DashboardHome({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final HomeController controller = Get.put(HomeController());
+
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Dashboard"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {},
+          )
+        ],
+      ),
+      drawer: DrawerScreen(
+        onItemSelected: controller.changePage,
+        selectedIndex: controller.selectedIndex.value,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -187,7 +204,7 @@ class DashboardHome extends StatelessWidget {
             const SizedBox(height: 20),
 
             /// --- QUICK ACCESS GRID ---
-            GridView.count(
+          /*  GridView.count(
               crossAxisCount: 2,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -201,7 +218,7 @@ class DashboardHome extends StatelessWidget {
                 QuickAccessCard(icon: Icons.money, title: "Expenses"),
                 QuickAccessCard(icon: Icons.person, title: "Profile"),
               ],
-            ),
+            ),*/
           ],
         ),
       ),

@@ -29,7 +29,7 @@ class DashboardScreen extends StatelessWidget {
       onWillPop: controller.onWillPop,
       child: Obx(
         () => Scaffold(
-          appBar: AppBar(
+          /*appBar: AppBar(
             title: const Text("Dashboard"),
             actions: [
               IconButton(
@@ -41,7 +41,7 @@ class DashboardScreen extends StatelessWidget {
           drawer: DrawerScreen(
             onItemSelected: controller.changePage,
             selectedIndex: controller.selectedIndex.value,
-          ),
+          ),*/
           body: pages[controller.selectedIndex.value],
           bottomNavigationBar: Container(
             decoration: BoxDecoration(

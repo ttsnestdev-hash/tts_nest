@@ -20,17 +20,17 @@ class DrawerScreen extends StatelessWidget {
         backgroundColor: Colors.grey[200],
         child: Column(
           children: [
-            UserAccountsDrawerHeader(
-              accountName: const Text(
+            const UserAccountsDrawerHeader(
+              accountName: Text(
                 "Emily Brown",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              accountEmail: const Text("emily.brown@email.com"),
+              accountEmail: Text("emily.brown@email.com"),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Icon(Icons.person, size: 40, color: Colors.blue),
               ),
-              decoration: const BoxDecoration(color: Colors.blue),
+             // decoration: BoxDecoration(color: Colors.blue),
               margin: EdgeInsets.zero,
             ),
             Expanded(
@@ -58,8 +58,7 @@ class DrawerScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   ListTile(
                     leading: const Icon(Icons.exit_to_app, color: Colors.red),
-                    title: const Text("Logout",
-                        style: TextStyle(color: Colors.red)),
+                    title: const Text("Logout",),
                     onTap: () => _confirmLogout(context),
                   ),
                   const Text(

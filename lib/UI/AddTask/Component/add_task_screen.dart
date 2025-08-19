@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../Widgets/Appbar/custom_appbar.dart';
 import '../../../Widgets/custom_button.dart';
 import '../../../Widgets/custom_fields.dart';
 import '../../../Widgets/customer_dropdown.dart';
@@ -13,10 +14,10 @@ class AddTaskScreen extends StatelessWidget {
     final controller = Get.put(AddTaskController());
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Add New Task"),
-        centerTitle: true,
-      ),
+      appBar: const CustomAppBar(
+      title: "Add New Task",
+      showBack: true,
+    ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(

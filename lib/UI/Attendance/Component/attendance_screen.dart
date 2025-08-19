@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../Widgets/Appbar/custom_appbar.dart';
 import '../Controller/attendance_controller.dart';
 
 class AttendanceScreen extends StatelessWidget {
@@ -12,6 +13,10 @@ class AttendanceScreen extends StatelessWidget {
     final AttendanceController controller = Get.put(AttendanceController());
 
     return Scaffold(
+      appBar: const CustomAppBar(
+        title: "Attendance",
+        showBack: true,
+      ),
       body: Obx(
         () {
           DateTime month = controller.selectedMonth.value;

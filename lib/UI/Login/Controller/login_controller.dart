@@ -20,9 +20,6 @@ class LoginController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 800)); // mock API
     isLoading.value = false;
 
-    // TODO: replace with real API + navigation
-    Get.snackbar('Success', 'Logged in as ${emailCtrl.text}',
-        snackPosition: SnackPosition.BOTTOM);
 
     Get.toNamed(Routes.dashboardScreen);
   }

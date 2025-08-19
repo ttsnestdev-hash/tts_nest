@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../Widgets/Appbar/custom_appbar.dart';
 import '../../../Widgets/DropdownWigets/dropdown_widgtes.dart';
 import '../../../Widgets/TextFormFeildWigets/textformfeilds_widgets.dart';
 import '../../../Widgets/custom_button.dart';
@@ -14,6 +15,10 @@ class LeavesScreen extends StatelessWidget {
     final controller = Get.put(LeaveRequestController());
 
     return Scaffold(
+      appBar: const CustomAppBar(
+        title: "Leave Request",
+        showBack: true,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
