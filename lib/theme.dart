@@ -14,13 +14,13 @@ class AppTheme {
 
   static ThemeData lightTheme = ThemeData(
     useMaterial3: false,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: const Color(0xFFEFF3F6),
     primaryColor: primaryColor,
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryColor,
       primary: primaryColor,
       secondary: accentColor,
-      background: Colors.white,
+      background: scaffoldBg,
     ),
     textTheme: GoogleFonts.interTextTheme(
       ThemeData.light().textTheme.apply(

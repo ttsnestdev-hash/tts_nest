@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../Widgets/DropdownWigets/dropdown_widgtes.dart';
+import '../../../Widgets/TextFormFeildWigets/textformfeilds_widgets.dart';
 import '../Controller/leave_controller.dart';
 
 class LeavesScreen extends StatelessWidget {
@@ -16,31 +18,30 @@ class LeavesScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Leave Type Dropdown
-            Obx(() => DropdownButtonFormField<String>(
-                  decoration: _inputDecoration("Select leave type"),
-                  value: controller.selectedLeaveType.value.isEmpty
-                      ? null
-                      : controller.selectedLeaveType.value,
+            // Leave Type Dropdown with CardDropdown
+            Obx(() => CardDropdown<String>(
+                  height: 60,
+                  hintText: "Select leave type",
                   items: controller.leaveTypes
-                      .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                      .map(
+                          (e) => CustDropdownMenuItem(value: e, child: Text(e)))
                       .toList(),
                   onChanged: (val) {
                     controller.selectedLeaveType.value = val ?? "";
                   },
                 )),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
 
             // From / To Date
             Row(
               children: [
                 Expanded(
-                  child: TextFormField(
+                  child: CommonTextField(
                     controller: controller.fromDateCtrl,
+                    hintText: "From date",
                     readOnly: true,
-                    decoration: _inputDecoration("From date")
-                        .copyWith(suffixIcon: const Icon(Icons.calendar_today)),
+                    suffixIcon: const Icon(Icons.calendar_today),
                     onTap: () async {
                       DateTime? picked = await showDatePicker(
                         context: context,
@@ -57,11 +58,11 @@ class LeavesScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: TextFormField(
+                  child: CommonTextField(
                     controller: controller.toDateCtrl,
+                    hintText: "To date",
                     readOnly: true,
-                    decoration: _inputDecoration("To date")
-                        .copyWith(suffixIcon: const Icon(Icons.calendar_today)),
+                    suffixIcon: const Icon(Icons.calendar_today),
                     onTap: () async {
                       DateTime? picked = await showDatePicker(
                         context: context,
@@ -81,32 +82,70 @@ class LeavesScreen extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            TextFormField(
+            CommonTextField(
               controller: controller.durationCtrl,
-              decoration: _inputDecoration("Duration"),
+              hintText: "Duration",
             ),
 
             const SizedBox(height: 16),
+            // Inside your build method
+            // Day Type Selector
+            Obx(() {
+              final options = ["Full day", "AN", "FN"];
+              final selected = controller.selectedDayType.value;
 
-            // Day Type Toggle
-            Obx(() => Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: ["Full day", "AN", "FN"]
-                      .map((e) => ChoiceChip(
-                            label: Text(e),
-                            selected: controller.selectedDayType.value == e,
-                            onSelected: (_) =>
-                                controller.selectedDayType.value = e,
-                            selectedColor: Colors.red,
-                          ))
-                      .toList(),
-                )),
+              return Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade400),
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Row(
+                  children: options.map((option) {
+                    final isSelected = selected == option;
+
+                    return Expanded(
+                      child: InkWell(
+                        onTap: () => controller.selectedDayType.value = option,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 8),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? Colors.red.shade50
+                                : Colors.grey.shade100,
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (isSelected) ...[
+                                const Icon(Icons.check,
+                                    color: Colors.red, size: 18),
+                                const SizedBox(width: 4),
+                              ],
+                              Text(
+                                option,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: isSelected ? Colors.red : Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              );
+            }),
 
             const SizedBox(height: 16),
 
-            TextFormField(
+            CommonTextField(
               controller: controller.reasonCtrl,
-              decoration: _inputDecoration("Reason for leave"),
+              hintText: "Reason for leave",
             ),
 
             const SizedBox(height: 16),
@@ -125,20 +164,21 @@ class LeavesScreen extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            TextFormField(
+            CommonTextField(
               controller: controller.empCodeCtrl,
-              decoration: _inputDecoration("Employee Code"),
+              hintText: "Employee Code",
             ),
             const SizedBox(height: 16),
-            TextFormField(
+            CommonTextField(
               controller: controller.empNameCtrl,
-              decoration: _inputDecoration("Employee Name"),
+              hintText: "Employee Name",
             ),
             const SizedBox(height: 16),
-            TextFormField(
+            CommonTextField(
               controller: controller.phoneCtrl,
-              decoration: _inputDecoration("Applicant's phone Number"),
+              hintText: "Applicant's phone Number",
               keyboardType: TextInputType.phone,
+              prefixIcon: const Icon(Icons.phone),
             ),
 
             const SizedBox(height: 24),
@@ -156,19 +196,6 @@ class LeavesScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  InputDecoration _inputDecoration(String hint) {
-    return InputDecoration(
-      hintText: hint,
-      filled: true,
-      fillColor: Colors.white, // 🔥 White background
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide.none, // 🔥 No border line
       ),
     );
   }

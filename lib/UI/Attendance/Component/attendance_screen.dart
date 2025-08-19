@@ -20,6 +20,7 @@ class AttendanceScreen extends StatelessWidget {
           return Column(
             children: [
               // Month Selector + Calendar
+
               Card(
                 margin: const EdgeInsets.all(12),
                 shape: RoundedRectangleBorder(
@@ -27,6 +28,16 @@ class AttendanceScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(
+                          controller.isExpanded.value
+                              ? Icons.expand_less
+                              : Icons.expand_more,
+                        ),
+                      ],
+                    ),
                     // Month Header
                     InkWell(
                       onTap: controller.toggleExpanded,
@@ -49,11 +60,6 @@ class AttendanceScreen extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                Icon(
-                                  controller.isExpanded.value
-                                      ? Icons.expand_less
-                                      : Icons.expand_more,
-                                ),
                                 IconButton(
                                   onPressed: controller.nextMonth,
                                   icon: const Icon(Icons.arrow_forward_ios,
@@ -243,7 +249,7 @@ class AttendanceCard extends StatelessWidget {
                           text: attendance.punchIn ?? "-",
                           style: const TextStyle(
                             fontWeight: FontWeight.normal,
-                            color: Colors.blue, // you can change the color
+                            color: Colors.green,
                           ),
                         ),
                       ],
