@@ -32,23 +32,21 @@ class CardDropdown<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
-      child: Card(
-        elevation: elevation,
-        shape: RoundedRectangleBorder(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white, // pure white
           borderRadius: BorderRadius.circular(borderRadius),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          child: CustDropDown<T>(
-            items: items,
-            hintText: hintText,
-            borderRadius: borderRadius,
-            maxListHeight: maxListHeight,
-            borderWidth: borderWidth,
-            defaultSelectedIndex: defaultSelectedIndex,
-            enabled: enabled,
-            onChanged: onChanged,
-          ),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        child: CustDropDown<T>(
+          items: items,
+          hintText: hintText,
+          borderRadius: borderRadius,
+          maxListHeight: maxListHeight,
+          borderWidth: borderWidth,
+          defaultSelectedIndex: defaultSelectedIndex,
+          enabled: enabled,
+          onChanged: onChanged,
         ),
       ),
     );
