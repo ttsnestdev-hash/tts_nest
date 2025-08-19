@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tts_nest/theme.dart';
 
-import 'UI/Dashboard/Component/dashboard_screen.dart';
+import 'Routes/Pages.dart';
+import 'Routes/Routes.dart';
 import 'UI/Login/Controller/login_controller.dart';
 
 void main() {
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
       initialBinding: BindingsBuilder(() {
         Get.put(LoginController());
       }),
-      home: const DashboardScreen(),
+      getPages: Pages.pages,          // 👈 added this
+      initialRoute: Routes.logInScreen, // 👈 use routes instead of home
     );
   }
 }

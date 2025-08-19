@@ -43,15 +43,15 @@ class AppTheme {
       fillColor: AppColors.cardBackground,
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(color: Colors.black.withOpacity(0.05)),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(10),
         borderSide: const BorderSide(color: primaryColor, width: 1.2),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(10),
         borderSide: const BorderSide(color: Colors.red),
       ),
     ),

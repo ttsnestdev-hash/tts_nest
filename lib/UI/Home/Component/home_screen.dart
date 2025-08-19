@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../../../Routes/Routes.dart';
 import '../../../Widgets/quick_access_card.dart';
 
 class DashboardHome extends StatelessWidget {
@@ -13,16 +16,15 @@ class DashboardHome extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// --- TOP CHECKIN / CHECKOUT SECTION ---
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.black12,
-                    offset: const Offset(0, 1),
+                    offset: Offset(0, 1),
                     blurRadius: 3,
                   ),
                 ],
@@ -116,7 +118,9 @@ class DashboardHome extends StatelessWidget {
                         borderRadius: BorderRadius.circular(6),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.newTaskScreen);
+                    },
                     child: const Text(
                       "NEW TASK",
                       style:
