@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../Widgets/TextFormFeildWigets/textformfeilds_widgets.dart';
 import '../../../Widgets/custom_button.dart';
-import '../../../Widgets/custom_fields.dart';
 import '../Controller/login_controller.dart';
 
 class LoginScreen extends GetView<LoginController> {
@@ -38,17 +38,19 @@ class LoginScreen extends GetView<LoginController> {
                     "Sign in to access your nest history and get real time updates",
                   ),
                   const SizedBox(height: 32),
-                  CircleTextField(
-                    hint: 'Email',
+                  CommonTextField(
+                    height: 60,
+                    hintText: 'Email',
                     controller: controller.emailCtrl,
                     keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 16),
-                  Obx(() => CircleTextField(
-                        hint: 'Password',
+                  Obx(() => CommonTextField(
+                        height: 60,
+                        hintText: 'Password',
                         controller: controller.passCtrl,
                         obscureText: controller.obscure.value,
-                        suffix: IconButton(
+                        suffixIcon: IconButton(
                           onPressed: controller.toggleObscure,
                           icon: Icon(controller.obscure.value
                               ? Icons.visibility_off_rounded

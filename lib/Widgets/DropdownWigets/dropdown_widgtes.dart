@@ -170,7 +170,7 @@ class _CustDropDownState extends State<CustDropDown>
                               maxWidth: size.width),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(12)),
+                              borderRadius: BorderRadius.circular(5)),
                           child: ClipRRect(
                             borderRadius: BorderRadius.all(
                               Radius.circular(widget.borderRadius),
@@ -198,7 +198,7 @@ class _CustDropDownState extends State<CustDropDown>
                                     itemBuilder: (context, index) {
                                       final item = widget.items[index];
                                       return InkWell(
-                                        borderRadius: BorderRadius.circular(8),
+                                        borderRadius: BorderRadius.circular(5),
                                         onTap: () {
                                           if (mounted) {
                                             setState(() {
