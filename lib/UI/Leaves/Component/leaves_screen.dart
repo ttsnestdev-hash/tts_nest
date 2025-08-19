@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../Widgets/DropdownWigets/dropdown_widgtes.dart';
 import '../Controller/leave_controller.dart';
 
 class LeavesScreen extends StatelessWidget {
@@ -16,21 +17,20 @@ class LeavesScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Leave Type Dropdown
-            Obx(() => DropdownButtonFormField<String>(
-                  decoration: _inputDecoration("Select leave type"),
-                  value: controller.selectedLeaveType.value.isEmpty
-                      ? null
-                      : controller.selectedLeaveType.value,
-                  items: controller.leaveTypes
-                      .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-                      .toList(),
-                  onChanged: (val) {
-                    controller.selectedLeaveType.value = val ?? "";
-                  },
-                )),
+            // Leave Type Dropdown with CardDropdown
+            Obx(() => CardDropdown<String>(
+              height: 60,
+              hintText: "Select leave type",
+              items: controller.leaveTypes
+                  .map(
+                      (e) => CustDropdownMenuItem(value: e, child: Text(e)))
+                  .toList(),
+              onChanged: (val) {
+                controller.selectedLeaveType.value = val ?? "";
+              },
+            )),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
 
             // From / To Date
             Row(
@@ -50,7 +50,7 @@ class LeavesScreen extends StatelessWidget {
                       );
                       if (picked != null) {
                         controller.fromDateCtrl.text =
-                            picked.toString().split(" ")[0];
+                        picked.toString().split(" ")[0];
                       }
                     },
                   ),
@@ -71,7 +71,7 @@ class LeavesScreen extends StatelessWidget {
                       );
                       if (picked != null) {
                         controller.toDateCtrl.text =
-                            picked.toString().split(" ")[0];
+                        picked.toString().split(" ")[0];
                       }
                     },
                   ),
@@ -90,17 +90,17 @@ class LeavesScreen extends StatelessWidget {
 
             // Day Type Toggle
             Obx(() => Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: ["Full day", "AN", "FN"]
-                      .map((e) => ChoiceChip(
-                            label: Text(e),
-                            selected: controller.selectedDayType.value == e,
-                            onSelected: (_) =>
-                                controller.selectedDayType.value = e,
-                            selectedColor: Colors.red,
-                          ))
-                      .toList(),
-                )),
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: ["Full day", "AN", "FN"]
+                  .map((e) => ChoiceChip(
+                label: Text(e),
+                selected: controller.selectedDayType.value == e,
+                onSelected: (_) =>
+                controller.selectedDayType.value = e,
+                selectedColor: Colors.red,
+              ))
+                  .toList(),
+            )),
 
             const SizedBox(height: 16),
 
@@ -117,9 +117,9 @@ class LeavesScreen extends StatelessWidget {
                 const Text("Is it a Comp Off?"),
                 const SizedBox(width: 12),
                 Obx(() => Switch(
-                      value: controller.isCompOff.value,
-                      onChanged: (val) => controller.isCompOff.value = val,
-                    )),
+                  value: controller.isCompOff.value,
+                  onChanged: (val) => controller.isCompOff.value = val,
+                )),
               ],
             ),
 
@@ -151,7 +151,7 @@ class LeavesScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 14)),
                 onPressed: controller.submitLeave,
                 child:
-                    const Text("SUBMIT", style: TextStyle(color: Colors.white)),
+                const Text("SUBMIT", style: TextStyle(color: Colors.white)),
               ),
             ),
           ],
@@ -166,10 +166,6 @@ class LeavesScreen extends StatelessWidget {
       filled: true,
       fillColor: Colors.white, // 🔥 White background
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide.none, // 🔥 No border line
-      ),
     );
   }
 }
